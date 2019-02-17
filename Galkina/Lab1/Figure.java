@@ -1,19 +1,19 @@
-package Lab1;
+package lab1;
 
 import java.awt.geom.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class Figure implements Shape {
 
     private Area figureArea = new Area();
 
     Figure(double angle, int step) {
-        Shape point, jog;
+        Shape point;
+        Shape jog;
         point = new Ellipse2D.Double(-10, -10, 20, 20);
         jog = new Rectangle(-2, 0, 4, 70);
-        AffineTransform at = AffineTransform.getRotateInstance(angle * Math.PI / 180, Main.xBegin + step, Main.y);
-        at.translate(Main.xBegin + step, Main.y);
+        final AffineTransform at = AffineTransform.getRotateInstance(angle * Math.PI / 180, Main.X_BEGIN + step, Main.Y);
+        at.translate(Main.X_BEGIN + step, Main.Y);
         jog = at.createTransformedShape(jog);
         point = at.createTransformedShape(point);
         if (!figureArea.isEmpty()) {
@@ -23,17 +23,16 @@ public class Figure implements Shape {
         figureArea.add(new Area(jog));
     }
 
-    public Figure changeAngle(double angle, int step) {
-        Figure figure = new Figure(angle, step);
-        return figure;
+    public Figure changeAngle(final double angle, final int step) {
+        return new Figure(angle, step);
     }
 
-    public boolean contains(double x, double y) {
+    public boolean contains(final double x, final double y) {
         return figureArea.contains(x, y);
     }
 
     @Override
-    public PathIterator getPathIterator(AffineTransform at) {
+    public PathIterator getPathIterator(final AffineTransform at) {
         return figureArea.getPathIterator(at);
     }
 
@@ -43,26 +42,26 @@ public class Figure implements Shape {
     }
 
     @Override
-    public boolean contains(Point2D p) {
+    public boolean contains(final Point2D p) {
         return figureArea.contains(p);
     }
 
     @Override
-    public boolean intersects(Rectangle2D r) {
+    public boolean intersects(final Rectangle2D r) {
         return figureArea.intersects(r);
     }
 
-    public boolean intersects(double a, double b, double c, double d) {
+    public boolean intersects(final double a, final double b, final double c, final double d) {
         return figureArea.intersects(a, b, c, d);
     }
 
     @Override
-    public boolean contains(Rectangle2D r) {
+    public boolean contains(final Rectangle2D r) {
         return figureArea.contains(r);
     }
 
     @Override
-    public boolean contains(double x, double y, double w, double h) {
+    public boolean contains(final double x, final double y, final double w, final double h) {
         return figureArea.contains(x, y, w, h);
     }
 
@@ -72,7 +71,7 @@ public class Figure implements Shape {
     }
 
     @Override
-    public PathIterator getPathIterator(AffineTransform at, double flatness) {
+    public PathIterator getPathIterator(final AffineTransform at, final double flatness) {
         return figureArea.getPathIterator(at, flatness);
     }
 }
