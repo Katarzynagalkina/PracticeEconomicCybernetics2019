@@ -14,48 +14,45 @@ public class MyStroke implements Stroke {
     }
 
     @Override
-    public Shape createStrokedShape(Shape shape) {
-        GeneralPath shapePath = new GeneralPath();
+    public Shape createStrokedShape(final Shape shape) {
+        final GeneralPath shapePath = new GeneralPath();
 
-        float[] xy = new float[2];
-        float[] pre_xy = new float[2];
+        final float[] xy = new float[2];
+        final float[] pre_xy = new float[2];
 
-        for (PathIterator i = shape.getPathIterator(null); !i.isDone(); i.next()) {
-            int type = i.currentSegment(xy);
+        for (final PathIterator i = shape.getPathIterator(null); !i.isDone(); i.next()) {
+            final int type = i.currentSegment(xy);
 
-            switch (type) {
-                case PathIterator.SEG_MOVETO:
-                    shapePath.moveTo(xy[0], xy[1]);
-                    break;
-                case PathIterator.SEG_LINETO:
-                    double x1 = pre_xy[0];
-                    double y1 = pre_xy[1];
-                    double x2 = xy[0];
-                    double y2 = xy[1];
-                    double step = 4;
+            if (type == PathIterator.SEG_MOVETO) {
+                shapePath.moveTo(xy[0], xy[1]);
+            } else if (type == PathIterator.SEG_LINETO) {
+                double x1 = pre_xy[0];
+                double y1 = pre_xy[1];
+                final double x2 = xy[0];
+                final double y2 = xy[1];
+                final double step = 4;
 
-                    double dx = x2 - x1;
-                    double dy = y2 - y1;
-                    double length = Math.sqrt(dx * dx + dy * dy);
-                    dx /= length;
-                    dy /= length;
+                double dx = x2 - x1;
+                double dy = y2 - y1;
+                final double length = Math.sqrt(dx * dx + dy * dy);
+                dx /= length;
+                dy /= length;
+                y1 += dx * step;
+
+                if (!Double.isInfinite(length)) {
+                    x1 += dx * step;
+                    y1 -= dx * step;
+                    shapePath.lineTo(x1, y1);
+                    y1 -= dx * step;
+                    shapePath.lineTo(x1, y1);
+                    x1 += dx * step;
+                    shapePath.lineTo(x1, y1);
                     y1 += dx * step;
-
-                    if (!Double.isInfinite(length)) {
-                        x1 += dx * step;
-                        y1 -= dx * step;
-                        shapePath.lineTo(x1, y1);
-                        y1 -= dx * step;
-                        shapePath.lineTo(x1, y1);
-                        x1 += dx * step;
-                        shapePath.lineTo(x1, y1);
-                        y1 += dx * step;
-                        shapePath.lineTo(x1, y1);
-                        x1 += dx * step;
-                        y1 += dx * step;
-                        shapePath.lineTo(x1, y1);
-                    }
-                    break;
+                    shapePath.lineTo(x1, y1);
+                    x1 += dx * step;
+                    y1 += dx * step;
+                    shapePath.lineTo(x1, y1);
+                }
             }
             pre_xy[0] = xy[0];
             pre_xy[1] = xy[1];

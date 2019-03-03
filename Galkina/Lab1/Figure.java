@@ -7,7 +7,7 @@ public class Figure implements Shape {
 
     private Area figureArea = new Area();
 
-    Figure(double angle, int step) {
+    Figure( final double angle, final  int step) {
         Shape point;
         Shape jog;
         point = new Ellipse2D.Double(-10, -10, 20, 20);

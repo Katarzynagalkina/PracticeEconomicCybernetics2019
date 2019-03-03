@@ -9,16 +9,16 @@ import java.awt.*;
 public class Figure implements Shape {
 
     private Area figureArea = new Area();
-    private String LINE = "GO";
-    private int RECRANGLE_WIDTH =300;
-    private int RECTANGLE_HEIGHT =170;
+    private final String LINE = "GO";
+    private final int RECRANGLE_WIDTH = 300;
+    private final int RECTANGLE_HEIGHT = 170;
     private static final int FONT_SIZE = 100;
 
-    Figure(final int x, final int y,final Graphics2D graphics2D,final JPanel panel) {
-        Shape rectangle = new Rectangle(x, y, RECRANGLE_WIDTH, RECTANGLE_HEIGHT);
+    Figure(final int x, final int y, final Graphics2D graphics2D) {
+        final Shape rectangle = new Rectangle(x, y, RECRANGLE_WIDTH, RECTANGLE_HEIGHT);
         final AffineTransform transform = AffineTransform.getTranslateInstance(
                 ((Rectangle) rectangle).x, ((Rectangle) rectangle).y);
-        transform.translate(((Rectangle) rectangle).width / 3,  2*((Rectangle) rectangle).height / 3);
+        transform.translate(((Rectangle) rectangle).width / 3, 2 * ((Rectangle) rectangle).height / 3);
         final FontRenderContext fontRenderContext = graphics2D.getFontRenderContext();
         final Font font = new Font(Font.MONOSPACED, Font.BOLD, FONT_SIZE);
         final TextLayout textLayout = new TextLayout(LINE, font, fontRenderContext);
@@ -30,7 +30,7 @@ public class Figure implements Shape {
     }
 
     public Figure changeAngle(final int x, final int y, final Graphics2D graphics2D, final JPanel panel) {
-        return new Figure(x, y, graphics2D, panel);
+        return new Figure(x, y, graphics2D);
     }
 
     public boolean contains(final double x, final double y) {

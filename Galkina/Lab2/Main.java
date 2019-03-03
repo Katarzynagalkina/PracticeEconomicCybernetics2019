@@ -7,17 +7,17 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 
-public class Main {
+public final class Main {
 
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 500;
     private static final int BORDERWIDTH = 10;
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
+    public static void main(final String[] args) {
+        final JFrame frame = new JFrame();
         frame.setVisible(true);
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
+        final Toolkit toolkit = Toolkit.getDefaultToolkit();
+        final Dimension dimension = toolkit.getScreenSize();
         frame.setBounds(dimension.width / 6, dimension.height / 5, WIDTH, HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -31,7 +31,7 @@ public class Main {
                 g2d.setPaint(Color.PINK);
                 g2d.setStroke(new BasicStroke(BORDERWIDTH));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
-                Figure figure = new Figure(25, 100, g2d, this);
+                Figure figure = new Figure(25, 100, g2d);
 
                 final AffineTransform shadowTransform = AffineTransform.getShearInstance(-2, 0);
                 shadowTransform.scale(1, 0.4);

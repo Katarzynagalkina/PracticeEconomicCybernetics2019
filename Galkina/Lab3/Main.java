@@ -11,11 +11,11 @@ public class Main {
     private static int centerX;
     private static int centerY;
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
+    public static void main(final String[] args) {
+        final JFrame frame = new JFrame();
         frame.setVisible(true);
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
+        final  Toolkit toolkit = Toolkit.getDefaultToolkit();
+        final Dimension dimension = toolkit.getScreenSize();
         frame.setBounds(dimension.width / 6, dimension.height / 5, WIDTH, HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

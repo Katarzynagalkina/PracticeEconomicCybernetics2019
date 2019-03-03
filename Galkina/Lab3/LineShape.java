@@ -70,11 +70,10 @@ public class LineShape implements Shape {
     }
 
     class ShapeIterator implements PathIterator {
-        boolean done = false;
+        boolean done;
         double h = 10;
         boolean start = true;
         double t = centerX * (-1);
-
 
         @Override
         public int getWindingRule() {
